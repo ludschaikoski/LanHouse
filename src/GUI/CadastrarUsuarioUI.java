@@ -8,6 +8,8 @@ package GUI;
 import Entity.Usuario;
 import DAO.ConectaBanco;
 import DAO.UsuarioDAO;
+import Entity.VerificaDados;
+import static java.lang.Character.isDigit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,8 +17,9 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
-/** 
+/**
  *
  * @author felipe
  */
@@ -30,6 +33,12 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
      */
     public CadastrarUsuarioUI() {
         initComponents();
+
+        jLabelMsgObrigatorioNome.setVisible(false);
+        jLabelMsgObrigatorioApelido.setVisible(false);
+        jLabelMsgObrigatorioCPF.setVisible(false);
+        jLabelMsgObrigatorioSenha.setVisible(false);
+
     }
 
     /**
@@ -55,6 +64,10 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
         TelefoneLabel1 = new javax.swing.JLabel();
         TelefoneTextField = new javax.swing.JTextField();
         DadosPessoaisLabel = new javax.swing.JLabel();
+        jLabelMsgObrigatorioApelido = new javax.swing.JLabel();
+        jLabelMsgObrigatorioCPF = new javax.swing.JLabel();
+        jLabelMsgObrigatorioNome = new javax.swing.JLabel();
+        TelefonejFormattedTextField1 = new javax.swing.JFormattedTextField();
         EnderecoPanel = new javax.swing.JPanel();
         EnderecoLabel = new javax.swing.JLabel();
         RuaLabel = new javax.swing.JLabel();
@@ -74,6 +87,8 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
         LimparButton = new javax.swing.JButton();
         SairButton = new javax.swing.JButton();
         SenhaPasswordField = new javax.swing.JPasswordField();
+        jLabelMsgObrigatorioNome1 = new javax.swing.JLabel();
+        jLabelMsgObrigatorioSenha = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -120,6 +135,19 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
 
         DadosPessoaisLabel.setText("Dados Pessoais:");
 
+        jLabelMsgObrigatorioApelido.setText("* Campo Obrigatório");
+
+        jLabelMsgObrigatorioCPF.setText("* Campo Obrigatório");
+
+        jLabelMsgObrigatorioNome.setText("* Campo Obrigatório");
+
+        TelefonejFormattedTextField1.setText("jFormattedTextField1");
+        TelefonejFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TelefonejFormattedTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout DadosPessoaisPanelLayout = new javax.swing.GroupLayout(DadosPessoaisPanel);
         DadosPessoaisPanel.setLayout(DadosPessoaisPanelLayout);
         DadosPessoaisPanelLayout.setHorizontalGroup(
@@ -134,14 +162,25 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
                             .addComponent(ApelidoLabel))
                         .addGap(24, 24, 24)
                         .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(TelefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(ApelidoTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(CpfTextField, javax.swing.GroupLayout.Alignment.LEADING)))))
+                            .addGroup(DadosPessoaisPanelLayout.createSequentialGroup()
+                                .addComponent(NomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelMsgObrigatorioNome))
+                            .addGroup(DadosPessoaisPanelLayout.createSequentialGroup()
+                                .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(TelefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(ApelidoTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                        .addComponent(CpfTextField, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addGap(18, 18, 18)
+                                .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(DadosPessoaisPanelLayout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(TelefonejFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelMsgObrigatorioApelido)
+                                    .addComponent(jLabelMsgObrigatorioCPF)))))
                     .addComponent(CpfLabel, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DadosPessoaisPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(DadosPessoaisLabel)
@@ -154,19 +193,23 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NomeLabel)
-                    .addComponent(NomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelMsgObrigatorioNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ApelidoLabel)
-                    .addComponent(ApelidoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ApelidoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelMsgObrigatorioApelido))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CpfLabel)
-                    .addComponent(CpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelMsgObrigatorioCPF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DadosPessoaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TelefoneLabel1)
-                    .addComponent(TelefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TelefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TelefonejFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -277,6 +320,10 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
             }
         });
 
+        jLabelMsgObrigatorioNome1.setText("* Campo Obrigatório");
+
+        jLabelMsgObrigatorioSenha.setText("* Campo Obrigatório");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,13 +340,20 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
                         .addComponent(Senhalabel)
                         .addGap(18, 18, 18)
                         .addComponent(SenhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelMsgObrigatorioSenha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SalvarButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LimparButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SairButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(365, 365, 365)
+                    .addComponent(jLabelMsgObrigatorioNome1)
+                    .addContainerGap(365, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,8 +370,14 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
                     .addComponent(SalvarButton)
                     .addComponent(LimparButton)
                     .addComponent(SairButton)
-                    .addComponent(SenhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SenhaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelMsgObrigatorioSenha))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(261, 261, 261)
+                    .addComponent(jLabelMsgObrigatorioNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(280, Short.MAX_VALUE)))
         );
 
         pack();
@@ -358,14 +418,87 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         conectaBanco();
         String dados = "'" + NomeTextField.getText() + "','" + ApelidoTextField.getText() + "','" + CpfTextField.getText() + "','" + TelefoneTextField.getText() + "','" + RuaTextField.getText() + "','" + NumeroTextField.getText() + "','" + ComplementoTextField.getText() + "','" + BairroTextField.getText() + "','" + CidadeTextField.getText() + "','" + CepTextField.getText() + "','" + Senhalabel.getText() + "'";
+
+        /*
+         // verifica se o campo está vazio   
+         if (NomeTextField.getText().equals("")) { 
+         JOptionPane.showMessageDialog(null, "Campo nome vazio");
+         return;
+         } 
+         */
+        VerificaDados vd = new VerificaDados();
+
+        vd.verificaCampoVazio(NomeTextField);
+        vd.verificaCampoVazio(ApelidoTextField);
+        vd.verificaCampoVazio(CpfTextField);
+        vd.verificaCampoVazio(SenhaPasswordField);
+
+        vd.verificaCampoComNumero(CidadeTextField);
+
+        vd.verificaCampoComLetra(CpfTextField);
+        vd.verificaCampoComLetra(CepTextField);
+        vd.verificaCampoComLetra(TelefoneTextField);
+
+        // verifica se possui números em campos onde só é permitido letras
+        if (NomeTextField.getText().length() > 0) {
+            jLabelMsgObrigatorioNome.setVisible(false);
+
+            vd.verificaCampoComNumero(NomeTextField);
+            /*
+             String nomeT = NomeTextField.getText();
+             for (char ch : nomeT.toCharArray()) {
+             if (!Character.isLetter(ch)) {
+             JOptionPane.showMessageDialog(null, "O campo nome deve conter somente letras!");
+             return;
+             }
+            
+             }
+             */
+        } else {
+            jLabelMsgObrigatorioNome.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Preencha o campo Nome");
+        }
+
+        if (ApelidoTextField.getText().length() > 0) {
+            jLabelMsgObrigatorioApelido.setVisible(false);
+        } else {
+            jLabelMsgObrigatorioApelido.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Preencha o campo Apelido");
+        }
+
+        if (CpfTextField.getText().length() > 0) {
+            jLabelMsgObrigatorioCPF.setVisible(false);
+        } else {
+            jLabelMsgObrigatorioCPF.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Preencha o campo CPF");
+        }
+
+        if (SenhaPasswordField.getText().length() > 0) {
+            jLabelMsgObrigatorioSenha.setVisible(false);
+        } else {
+            jLabelMsgObrigatorioSenha.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Preencha o campo Senha");
+        }
+
         try {
             statement.executeUpdate("INSERT INTO usuario(nome, apelido, cpf, telefone,rua, numero, complemento, bairro, cidade, cep, senha)  VALUES (" + dados + ")");
             JOptionPane.showMessageDialog(this, "Dados Salvo!");
             NomeTextField.setText("");
+            ApelidoTextField.setText("");
+            CpfTextField.setText("");
+            TelefoneTextField.setText("");
+            RuaTextField.setText("");
+            NumeroTextField.setText("");
+            ComplementoTextField.setText("");
+            BairroTextField.setText("");
+            CidadeTextField.setText("");
+            CepTextField.setText("");
+            SenhaPasswordField.setText("");
             connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarUsuarioUI.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar", "Cadastro nao sucedido", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         /*
          String nome = NomeTextField.getText();
@@ -387,6 +520,10 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_SalvarButtonActionPerformed
+
+    private void TelefonejFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TelefonejFormattedTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TelefonejFormattedTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,7 +566,7 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
             //Class.forName("apache_derby_net");
             Class.forName("org.postgresql.Driver");
 //            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Endo", "postgres", "padoka92");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", ""+1234);
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/lanhouse", "postgres", "admin");
             statement = connection.createStatement();
             System.out.println("Banco de Dados conectado!!!");
         } catch (ClassNotFoundException | SQLException e) {
@@ -470,7 +607,13 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
     private javax.swing.JLabel Senhalabel;
     private javax.swing.JLabel TelefoneLabel1;
     private javax.swing.JTextField TelefoneTextField;
+    private javax.swing.JFormattedTextField TelefonejFormattedTextField1;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabelMsgObrigatorioApelido;
+    private javax.swing.JLabel jLabelMsgObrigatorioCPF;
+    private javax.swing.JLabel jLabelMsgObrigatorioNome;
+    private javax.swing.JLabel jLabelMsgObrigatorioNome1;
+    private javax.swing.JLabel jLabelMsgObrigatorioSenha;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

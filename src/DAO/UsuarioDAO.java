@@ -25,9 +25,11 @@ public class UsuarioDAO {
     //static final String usuarioBanco = "postgres";
     //static final String senhaBanco = "padoka92";
     static final String nomeDoBanco = "lanhouse";
-    static final String usuarioBanco = "welington";
-    static final String senhaBanco = "1234";
-
+    //static final String usuarioBanco = "welington";
+    //static final String senhaBanco = "1234";
+    static final String usuarioBanco = "postgres";
+    static final String senhaBanco = "postgres";
+    
     Usuario usuario = new Usuario();
     Usuario usuarioNovo = new Usuario();//este usuario é apenas para para atualizar um usuario
     ConectaBanco conexao = new ConectaBanco();

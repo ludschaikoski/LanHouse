@@ -68,7 +68,9 @@
                       <Component id="Senhalabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="SenhaPasswordField" min="-2" pref="157" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabelMsgObrigatorioSenha" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="SalvarButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="LimparButton" min="-2" max="-2" attributes="0"/>
@@ -77,6 +79,13 @@
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="365" max="-2" attributes="0"/>
+                  <Component id="jLabelMsgObrigatorioNome1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="365" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,8 +105,16 @@
                   <Component id="LimparButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="SairButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="SenhaPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelMsgObrigatorioSenha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="261" max="-2" attributes="0"/>
+                  <Component id="jLabelMsgObrigatorioNome1" min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace pref="280" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -132,19 +149,34 @@
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="NomeTextField" alignment="0" min="-2" pref="402" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Component id="TelefoneTextField" min="-2" pref="176" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="ApelidoTextField" alignment="0" pref="176" max="32767" attributes="0"/>
-                                      <Component id="CpfTextField" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="NomeTextField" min="-2" pref="402" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabelMsgObrigatorioNome" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="TelefoneTextField" min="-2" pref="176" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="ApelidoTextField" alignment="0" pref="176" max="32767" attributes="0"/>
+                                          <Component id="CpfTextField" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                          <Component id="TelefonejFormattedTextField1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jLabelMsgObrigatorioApelido" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelMsgObrigatorioCPF" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
                       <Component id="CpfLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -161,21 +193,25 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="NomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="NomeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelMsgObrigatorioNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="ApelidoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ApelidoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelMsgObrigatorioApelido" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="CpfLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="CpfTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelMsgObrigatorioCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="TelefoneLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TelefoneTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TelefonejFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -221,6 +257,29 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Dados Pessoais:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelMsgObrigatorioApelido">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="* Campo Obrigat&#xf3;rio"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelMsgObrigatorioCPF">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="* Campo Obrigat&#xf3;rio"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelMsgObrigatorioNome">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="* Campo Obrigat&#xf3;rio"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="TelefonejFormattedTextField1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TelefonejFormattedTextField1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -396,6 +455,16 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="SenhaPasswordField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelMsgObrigatorioNome1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="* Campo Obrigat&#xf3;rio"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelMsgObrigatorioSenha">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="* Campo Obrigat&#xf3;rio"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
