@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UsuarioGUI;
+package GUI;
 
-import Usuario.Usuario;
-import UsuarioDAO.ConectaBanco;
-import UsuarioDAO.UsuarioDAO;
+import Entity.Usuario;
+import DAO.ConectaBanco;
+import DAO.UsuarioDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -270,7 +270,7 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
             }
         });
 
-        SairButton.setText("Sair");
+        SairButton.setText("Voltar");
         SairButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SairButtonActionPerformed(evt);
@@ -333,7 +333,8 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
 
     private void SairButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairButtonActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        //System.exit(0);
+        dispose();
     }//GEN-LAST:event_SairButtonActionPerformed
 
     private void LimparButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparButtonActionPerformed
