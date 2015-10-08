@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package lanhousees;
-import UsuarioGUI.CadastrarUsuario;
+import GUI.CadastrarUsuarioUI;
 /**
  *
  * @author Welington
@@ -15,7 +15,7 @@ public class LanHouseES {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CadastrarUsuario usuario = new CadastrarUsuario();
+        CadastrarUsuarioUI usuario = new CadastrarUsuarioUI();
         usuario.show(true);
     }
     
