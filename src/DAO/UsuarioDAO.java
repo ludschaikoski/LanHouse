@@ -3,9 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD:src/DAO/UsuarioDAO.java
 package DAO;
 
 import Entity.Usuario;
+=======
+package UsuarioDAO;
+
+import Usuario.Usuario;
+>>>>>>> f362c034151461637a42e39bf244419452e194e1:src/UsuarioDAO/UsuarioDAO.java
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -21,6 +27,7 @@ public class UsuarioDAO {
     //Aqui são os dados para a conexão com o banco de dados
     //alterações de login no banco devem ser feitas APENAS nestas variáveis
     //para facilitar a legibilidade.
+<<<<<<< HEAD:src/DAO/UsuarioDAO.java
 //    static final String nomeDoBanco = "Endo";
     //static final String usuarioBanco = "postgres";
     //static final String senhaBanco = "padoka92";
@@ -30,6 +37,12 @@ public class UsuarioDAO {
     static final String usuarioBanco = "postgres";
     static final String senhaBanco = "postgres";
     
+=======
+    static final String nomeDoBanco = "Endo";
+    static final String usuarioBanco = "postgres";
+    static final String senhaBanco = "padoka92";
+
+>>>>>>> f362c034151461637a42e39bf244419452e194e1:src/UsuarioDAO/UsuarioDAO.java
     Usuario usuario = new Usuario();
     Usuario usuarioNovo = new Usuario();//este usuario é apenas para para atualizar um usuario
     ConectaBanco conexao = new ConectaBanco();
@@ -106,5 +119,9 @@ public class UsuarioDAO {
 
         return true;
     }
+<<<<<<< HEAD:src/DAO/UsuarioDAO.java
     //selecionar
+=======
+
+>>>>>>> f362c034151461637a42e39bf244419452e194e1:src/UsuarioDAO/UsuarioDAO.java
 }

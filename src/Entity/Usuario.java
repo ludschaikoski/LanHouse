@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD:src/Entity/Usuario.java
 package Entity;
+=======
+package Usuario;
+>>>>>>> f362c034151461637a42e39bf244419452e194e1:src/Usuario/Usuario.java
 
 /**
  *
