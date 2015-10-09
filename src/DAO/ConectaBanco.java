@@ -23,11 +23,11 @@ public class ConectaBanco {
     public Connection getConnection(String user, String password) {
         try {
             Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/Endo", user, password);
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", user, password);
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Erro sql: "+ex.getMessage());
         } catch (ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Exception: "+ex.getMessage());
         }
         return null;
     }

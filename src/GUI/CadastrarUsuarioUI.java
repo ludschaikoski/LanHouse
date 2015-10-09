@@ -359,8 +359,8 @@ public class CadastrarUsuarioUI extends javax.swing.JFrame {
         conectaBanco();
         String dados = "'" + NomeTextField.getText() + "','" + ApelidoTextField.getText() + "','" + CpfTextField.getText() + "','" + TelefoneTextField.getText() + "','" + RuaTextField.getText() + "','" + NumeroTextField.getText() + "','" + ComplementoTextField.getText() + "','" + BairroTextField.getText() + "','" + CidadeTextField.getText() + "','" + CepTextField.getText() + "','" + Senhalabel.getText() + "'";
         try {
-            statement.executeUpdate("INSERT INTO usuario(nome, apelido, cpf, telefone,rua, numero, complemento, bairro, cidade, cep, senha)  VALUES (" + dados + ")");
-            JOptionPane.showMessageDialog(this, "Dados Salvo!");
+            statement.executeUpdate("INSERT INTO lanhouse.usuario(nome, apelido, cpf, telefone,rua, numero, complemento, bairro, cidade, cep, senha)  VALUES (" + dados + ")");
+            JOptionPane.showMessageDialog(this, "Dados Salvos!");
             NomeTextField.setText("");
             connection.close();
         } catch (SQLException ex) {

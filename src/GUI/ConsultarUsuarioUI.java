@@ -5,17 +5,40 @@
  */
 package GUI;
 
+import DAO.UsuarioDAO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Welington
  */
 public class ConsultarUsuarioUI extends javax.swing.JFrame {
 
+    UsuarioDAO usuarioDao = new UsuarioDAO();
+    ResultSet dados = null;
+    Vector<Vector<String>> listaUsuarios = new Vector<Vector<String>>();     
+    Vector<String> cab = new Vector<String>();    
+    
     /**
      * Creates new form ConsultarUsuarioUI
      */
     public ConsultarUsuarioUI() {
         initComponents();
+        cab.add("nome");
+        cab.add("apelido");
+        cab.add("cpf");
+        cab.add("telefone");
+        cab.add("senha");
+        cab.add("rua");
+        cab.add("numero");
+        cab.add("complemento");
+        cab.add("bairro");
+        cab.add("cidade");
+        cab.add("cep");
     }
 
     /**
@@ -30,8 +53,10 @@ public class ConsultarUsuarioUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
+        entradaBuscaNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,27 +66,53 @@ public class ConsultarUsuarioUI extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextField1.setText("jTextField1");
+        entradaBuscaNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entradaBuscaNomeActionPerformed(evt);
+            }
+        });
+        entradaBuscaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                entradaBuscaNomeKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Lista com todos");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            //new Object [][] {
+
+                // },
+            listaUsuarios,
+            new String [] {
+                "Nome", "Apelido", "CPF", "Telefone", "Rua", "Numero", "Complemento", "Bairro", "Cidade", "CEP"
+            }
+        ));
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(143, 143, 143))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(entradaBuscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(143, 143, 143))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,16 +123,50 @@ public class ConsultarUsuarioUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(entradaBuscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addGap(95, 95, 95))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void entradaBuscaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaBuscaNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entradaBuscaNomeActionPerformed
+
+    private void entradaBuscaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entradaBuscaNomeKeyTyped
+        // TODO add your handling code here:
+        //System.out.println(""+usuarioDao.consultaNome(entradaBuscaNome.getText()));
+        ResultSet r = usuarioDao.consultaNome(entradaBuscaNome.getText());
+        dados=r;
+        try {
+            while (r.next()){
+                System.out.println(" "+r.getString("nome"));
+                Vector<String> usuario = new Vector <>();
+                usuario.add(r.getString("nome"));
+                usuario.add(r.getString("apelido"));
+                usuario.add(r.getString("cpf"));
+                usuario.add(r.getString("telefone"));
+                usuario.add(r.getString("senha"));
+                usuario.add(r.getString("rua"));
+                usuario.add(r.getString("numero"));
+                usuario.add(r.getString("complemento"));
+                usuario.add(r.getString("bairro"));
+                usuario.add(r.getString("cidade"));
+                usuario.add(r.getString("cep"));
+                listaUsuarios.add(usuario);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarUsuarioUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_entradaBuscaNomeKeyTyped
+   
     /**
      * @param args the command line arguments
      */
@@ -108,7 +193,6 @@ public class ConsultarUsuarioUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ConsultarUsuarioUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -118,10 +202,12 @@ public class ConsultarUsuarioUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField entradaBuscaNome;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
