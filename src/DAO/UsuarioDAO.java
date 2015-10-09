@@ -48,26 +48,30 @@ public class UsuarioDAO {
     }
     
     public ResultSet consultaNome(String nome) {
-        
+        if(nome.length()>0){
         try {
             //PreparedStatement p = c.prepareStatement("Select * from " + nomeDoBanco + " where nome=\"{"+nome+"}\"+;");
+            
             PreparedStatement p = c.prepareStatement("Select * from "+nomeDoBanco+".usuario where nome like \'"+nome+"%\';");
             
             //System.out.println(""+);
            ResultSet r = p.executeQuery();
-           while (r.next()){
-               System.out.println(""+r.getString("nome"));
-           }
+           //while (r.next()){
+             //  System.out.println(""+r.getString("nome"));
+           //}
             /* if (!r.isBeforeFirst() ) {    
                 System.out.println("No data"); 
                 return r;
             } */
+           
             return r;
+            
         } catch (SQLException ex) {
             System.out.println("Erro UsuarioDAO consultaNome");
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
            // return false;
         }
+    }
         return null;
     }
     
