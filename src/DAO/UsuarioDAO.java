@@ -8,6 +8,7 @@ package DAO;
 import Entity.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,7 @@ public class UsuarioDAO {
     //static final String usuarioBanco = "postgres";
     //static final String senhaBanco = "padoka92";
     static final String nomeDoBanco = "lanhouse";
-    static final String usuarioBanco = "welington";
+    static final String usuarioBanco = "postgres";
     static final String senhaBanco = "1234";
 
     Usuario usuario = new Usuario();
@@ -33,30 +34,60 @@ public class UsuarioDAO {
     ConectaBanco conexao = new ConectaBanco();
     Connection c = conexao.getConnection(usuarioBanco, senhaBanco);
 
+
     //Read
     public boolean consulta() {
         try {
-            PreparedStatement p = c.prepareStatement("Select * from" + nomeDoBanco + ";");
-            p.executeQuery();
+            PreparedStatement p = c.prepareStatement("Select * from" + nomeDoBanco + ".usuario;");
+            ResultSet r = p.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
         return true;
     }
-
+    
+    public ResultSet consultaNome(String nome) {
+        
+        try {
+            //PreparedStatement p = c.prepareStatement("Select * from " + nomeDoBanco + " where nome=\"{"+nome+"}\"+;");
+            PreparedStatement p = c.prepareStatement("Select * from "+nomeDoBanco+".usuario where nome like \'"+nome+"%\';");
+            
+            //System.out.println(""+);
+           ResultSet r = p.executeQuery();
+           while (r.next()){
+               System.out.println(""+r.getString("nome"));
+           }
+            /* if (!r.isBeforeFirst() ) {    
+                System.out.println("No data"); 
+                return r;
+            } */
+            return r;
+        } catch (SQLException ex) {
+            System.out.println("Erro UsuarioDAO consultaNome");
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+           // return false;
+        }
+        return null;
+    }
+    
     //create
     public boolean criarUsuario(Usuario usuario) {
         PreparedStatement p = null;
         try {
-            p = c.prepareStatement("Insert into " + nomeDoBanco + " Values (?,?,?,?,?,?,?)");
+            p = c.prepareStatement("Insert into " + nomeDoBanco + " Values (?,?,?,?,?,?,?,?,?,?,?)");
             p.setString(1, usuario.getNome());
-            p.setString(2, usuario.getId().toString());
-            p.setString(3, usuario.getApelido());
-            p.setString(4, Character.toString(usuario.getCpf()));
-            p.setString(5, Character.toString(usuario.getEndereco()));
-            p.setString(6, usuario.getSenha());
-            p.setString(7, Double.toString(usuario.getTelefone()));
+            p.setString(2, usuario.getApelido());
+            p.setInt(3, usuario.getCpf());
+            p.setInt(4, usuario.getTelefone());
+            p.setString(5,usuario.getSenha());
+            //Endereco
+            p.setString(6, usuario.getRua());
+            p.setInt(7,usuario.getNumero());
+            p.setString(8,usuario.getComplemento());
+            p.setString(9,usuario.getBairro());
+            p.setString(10,usuario.getCidade());
+            p.setInt(11,usuario.getCep());
             p.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
